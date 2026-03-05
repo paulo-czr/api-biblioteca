@@ -14,6 +14,7 @@ public interface LivroMapper {
     
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "autor", ignore = true)
+    @Mapping(target = "categoria", ignore = true)
     public Livro toEntity(LivroRequestDto dto);
 
     public LivroResponseDto toDto(Livro livro);

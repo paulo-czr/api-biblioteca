@@ -67,16 +67,17 @@ public class AutorService {
 
     /**
      * Deleta Autor através do seu ID
-     * Exige confirmação se o Autor estiver Livros vinculado a ele
+     * Exige confirmação se o Autor estiver Livros vinculados a ele
      * 
      * @param id Identificador do Autor a ser deletado
+     * @param confirm Confirmação de Deleção
      */
     @Transactional
     public void deletarAutor(Long id, boolean confirm) {
         Autor autor = verificaAutorExistentePorId(id);
 
         if (!autor.getLivros().isEmpty() && confirm == false) {
-            throw new RuntimeException("O Autor ID: "+id +" possui " +autor.getLivros().size() +" livros. Para deletar tudo, envie o parâmetro de confirmação. (/autores/1?confirm=true)");
+            throw new IllegalArgumentException("O Autor " +autor.getNome() +" - ID: "+id +" possui " +autor.getLivros().size() +" livro(s). Para deletar tudo, envie o parâmetro de confirmação. (/autores/id-autor?confirm=true)");
         }
 
         repository.deleteById(id);

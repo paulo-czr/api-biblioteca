@@ -9,6 +9,7 @@ import com.estudos.biblioteca.dto.LivroResponseDto;
 import com.estudos.biblioteca.mapper.LivroMapper;
 import com.estudos.biblioteca.model.Livro;
 import com.estudos.biblioteca.model.Autor;
+import com.estudos.biblioteca.model.Categoria;
 import com.estudos.biblioteca.repository.LivroRepository;
 
 import jakarta.persistence.EntityNotFoundException;
@@ -18,13 +19,15 @@ import jakarta.transaction.Transactional;
 public class LivroService {
 
     private final AutorService autorService;
+    private final CategoriaService categoriaService;
     private final LivroRepository repository;
     private final LivroMapper mapper;
 
-    public LivroService(LivroRepository repository, LivroMapper mapper, AutorService autorService) {
+    public LivroService(LivroRepository repository, LivroMapper mapper, AutorService autorService, CategoriaService categoriaService) {
         this.repository = repository;
         this.mapper = mapper;
         this.autorService = autorService;
+        this.categoriaService = categoriaService;
     }
 
     /**
@@ -38,9 +41,12 @@ public class LivroService {
     public LivroResponseDto salvarLivro(LivroRequestDto dto) {
         
         Livro livroEntity = mapper.toEntity(dto);
-        //Garante que o Autor existe para vincular o Livro a ele
+        //Garante que o Autor e Categoria existem para vincular o Livro a eles
         Autor autor = autorService.verificaAutorExistentePorId(dto.getAutorId());
+        Categoria categoria = categoriaService.verificarCategoriaPorId(dto.getCategoriaId());
+
         autor.adicionarLivro(livroEntity);
+        categoria.adicionarLivro(livroEntity);
 
         Livro livroSalvo = repository.save(livroEntity);
         return mapper.toDto(livroSalvo);
@@ -141,7 +147,7 @@ public class LivroService {
      */
     public Livro verificaLivroExistentePorId(Long id) {
         Livro livroExistente = repository.findById(id).orElseThrow(
-                () -> new EntityNotFoundException("Livro com o ID " + id + "não encontrado."));
+                () -> new EntityNotFoundException("Livro com o ID " + id + " não encontrado."));
 
         return livroExistente;
     }

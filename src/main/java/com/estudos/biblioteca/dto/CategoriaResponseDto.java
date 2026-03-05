@@ -9,11 +9,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class LivroResponseDto {
-    
+public class CategoriaResponseDto {
     private Long id;
-    private String titulo;
-    private AutorResponseDto autor;
-    private CategoriaResponseDto categoria;
-
+    private String nomeCategoria;
 }

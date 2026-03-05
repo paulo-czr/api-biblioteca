@@ -38,7 +38,7 @@ public class LivroController {
 
     @GetMapping
     public ResponseEntity<List<LivroResponseDto>> listarLivros(@RequestParam(required = false) String titulo) {
-        List<LivroResponseDto> livros;
+        List<LivroResponseDto> livros;  
 
         if (titulo != null) {
             livros = service.buscarLivroPorTitulo(titulo);
@@ -68,7 +68,7 @@ public class LivroController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarLivroPorId(@PathVariable Long id){
+    public ResponseEntity<Void> deletarLivro(@PathVariable Long id){
         service.deletarLivroPorId(id);
         return ResponseEntity.noContent().build();
     }
