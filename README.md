@@ -4,11 +4,10 @@
 
 Esta é uma API RESTful completa para gerenciamento de uma biblioteca, permitindo o controle de Autores e seus respectivos Livros.
 O projeto foi desenvolvido focando em boas práticas de arquitetura, separação de responsabilidades e tratamento de erros robusto.  
-> Este projeto será futuramente preparado para execução com **Docker + MySQL**.
 
   <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=java,spring,vscode,postman&theme=dark" />
+    <img src="https://skillicons.dev/icons?i=java,spring,vscode,postman,docker,git&theme=dark" />
   </a>
 </p>
 
@@ -117,16 +116,34 @@ Resposta de Erro Padronizada (404 Not Found):
 ---
 
 ## Como executar o projeto
+Esta API está containerizada, o que significa que você não precisa instalar Java ou MySQL na sua máquina, apenas o **Docker**.
 
-1. Clone o repositório:
+  
+#### **Pré-requisitos:**  
+  - Docker Desktop instalado e rodando.
+  - Git para clonar o repositório.
+
+#### 1. **Clone o repositório:**
 ```
 git clone https://github.com/seu-usuario/biblioteca-api.git
 ```
-2. Importe o projeto na sua IDE favorita (IntelliJ, VS Code, Eclipse).
-3. Certifique-se de ter o Java 17+ instalado.
-4. Execute a classe principal ```BibliotecaApplication```.
-5. A API estará disponível em ```http://localhost:8080```.
 
+#### 2. **Gere o arquivo da aplicação (JAR):**
+(Caso tenha o Maven instalado):
+```
+mvn clean package -DskipTests
+```
+
+#### 3. **Suba os containers com o Docker Compose:**
+``` 
+docker compose up -d --build
+```
+
+#### 4. **Acesse a API:** 
+
+A aplicação estará disponível em ``` http://localhost:8080 ```  
+O banco de dados MySQL estará rodando na porta ```3306```  
+  
 ---
 
 ## Autor
