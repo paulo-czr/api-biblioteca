@@ -51,24 +51,31 @@ O projeto segue a arquitetura de camadas para garantir a separação de responsa
 ---
 
 ## Funcionalidades Principais
-#### Autores
-- Cadastro de autores
-- Listagem com contagem dinâmica de livros
-- Atualização de dados
-- Exclusão Segura: Impede a exclusão de autores com livros vinculados, a menos que uma confirmação seja enviada via parâmetro ```(?confirm=true)```
+#### Autores & Categorias
+- Cadastro, listagem, atualização e busca por ID.
+- Exclusão Segura: Impede a remoção de registros que possuem livros vinculados, a menos que uma confirmação seja enviada via parâmetro ```(?confirm=true)``` para deleção em cascata.
 
 ### Livros
-- Cadastro de livros vinculados a um autor existente
-- Busca por título (filtro parcial)
-- Busca de todos os livros de um autor específico
-- Atualização de título e troca de autor com validação de consistência
-
+- Cadastro vinculado obrigatoriamente a um Autor e uma Categoria.
+- Busca por título (filtro parcial/ignore case).
+- Listagem de todos os livros de um autor específico.
+- Integridade Referencial: Validação se o Autor e Categoria informados existem antes de salvar.
+  
 ## Endpoints da API
 
 A API permite as seguintes operações:
 
-### Autores  
+### Categorias  
 
+| Método HTTP | Endpoint                            | Descrição                                 |
+|------------|--------------------------------------|-------------------------------------------|
+| POST       | `/categorias`                           | Cria uma nova categoria                        |
+| GET        | `/categorias/{id}`                      | Busca categoria por ID                        |
+| PUT        | `/categorias/{id}`                      | Atualiza uma categoria                         |
+| DELETE     | `/categorias/{id}?confirm=true`         | Remove categoria e seus livros                |
+
+### Autores  
+_(Os endpoints para Autores seguem a mesma lógica de Categorias)_
 | Método HTTP | Endpoint                            | Descrição                                 |
 |------------|--------------------------------------|-------------------------------------------|
 | POST       | `/autores`                           | Cria um novo autor                        |
@@ -94,6 +101,7 @@ Criação de um Livro:
 {
   "titulo": "Dom Casmurro",
   "autorId": 1
+  "categoriaId": 1
 }
 ```
 Resposta de Erro Padronizada (404 Not Found):
@@ -117,7 +125,7 @@ git clone https://github.com/seu-usuario/biblioteca-api.git
 2. Importe o projeto na sua IDE favorita (IntelliJ, VS Code, Eclipse).
 3. Certifique-se de ter o Java 17+ instalado.
 4. Execute a classe principal ```BibliotecaApplication```.
-A API estará disponível em ```http://localhost:8080```.
+5. A API estará disponível em ```http://localhost:8080```.
 
 ---
 
