@@ -147,7 +147,8 @@ O banco de dados MySQL estará rodando na porta ```3306```
   
 ---
 
-## Variáveis de Ambiente
+## Variáveis de Ambiente  
+O projeto utiliza variáveis de ambiente para maior segurança e flexibilidade. Caso queira rodar localmente fora do Docker, você pode configurar as seguintes chaves:
 
 | Variável        | Descrição                       | Valor Padrão (Docker) |
 |-----------------|---------------------------------|-----------------------|
