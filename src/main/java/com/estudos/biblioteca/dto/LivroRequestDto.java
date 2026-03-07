@@ -16,11 +16,8 @@ public class LivroRequestDto {
 
     @NotNull(message = "O ID do Autor que escreveu o Livro é obrigatório.")
     private Long autorId;
-<<<<<<< HEAD
 
     @NotNull(message = "O ID da Categoria do Livro é obrigatória.")
     private Long categoriaId;
-=======
->>>>>>> 545ab69baed01190fcc9dd528acf22e5d6851d52
     
 }
