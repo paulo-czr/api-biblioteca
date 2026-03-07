@@ -21,6 +21,7 @@ O projeto foi desenvolvido focando em boas práticas de arquitetura, separação
 - [Funcionalidades Principais](#funcionalidades-principais)
 - [Endpoints](#endpoints-da-api)
 - [Como executar](#como-executar-o-projeto)
+- [Variáveis de Ambiente](#variaveis-de-ambiente)
 - [Autor](#autor)
 
 ---
@@ -31,7 +32,7 @@ O projeto foi desenvolvido focando em boas práticas de arquitetura, separação
 - **Spring Boot** 3.5.9
 - **Spring Data JPA:** Camada de persistência e consultas automáticas
 - **MapStruct:** Mapeamento performático entre Entidades e DTOs
-- **H2 Database:** Banco de dados para desenvolvimento
+- **MySQL:** Banco de Dados
 - **Jakarta Validation:** Validação de dados de entrada
 - **Global Exception Handling:** Tratamento centralizado de erros com ```@ControllerAdvice```
 - **DTOs:** Objeto de Transferência de Dados
@@ -144,6 +145,17 @@ docker compose up -d --build
 A aplicação estará disponível em ``` http://localhost:8080 ```  
 O banco de dados MySQL estará rodando na porta ```3306```  
   
+---
+
+## Variáveis de Ambiente
+
+| Variável        | Descrição                       | Valor Padrão (Docker) |
+|-----------------|---------------------------------|-----------------------|
+| `DB_HOST`       | Endereço do banco de dados      | `db`                  |
+| `DB_NAME`       | Nome do schema                  | `biblioteca_db`       |
+| `DB_USER`       | Usuário do MySQL                | `root`                |
+| `DB_PASSWORD`   | Senha do MySQL                  | `root`                |
+
 ---
 
 ## Autor
