@@ -97,6 +97,7 @@ public class CategoriaService {
      * @param id ID da Categoria para fazer essa verificação
      * @return Se existir, retornará a Categoria Existente, se não um Erro
      */
+    @Transactional
     public Categoria verificarCategoriaPorId(Long id){
         Categoria categoriaExistente = repository.findById(id).orElseThrow(
             () -> new EntityNotFoundException("Categoria com o ID "+id +" não encontrada.")
