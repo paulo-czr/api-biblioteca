@@ -11,12 +11,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "categorias")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -30,7 +32,7 @@ public class Categoria {
     @Column(nullable = false, length = 50)
     private String nomeCategoria;
 
-    @OneToMany(mappedBy = "categorias")
+    @OneToMany(mappedBy = "categoria")
     @JsonManagedReference
     private List<Livro>  livros = new ArrayList<>();
 

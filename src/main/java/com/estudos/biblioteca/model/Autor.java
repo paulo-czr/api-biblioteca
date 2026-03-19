@@ -12,12 +12,14 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@Table(name = "autores")
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -31,7 +33,7 @@ public class Autor {
     @Column(nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "autores", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Livro> livros = new ArrayList<>();
 
