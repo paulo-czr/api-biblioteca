@@ -33,7 +33,7 @@ public class Autor {
     @Column(nullable = false)
     private String nome;
 
-    @OneToMany(mappedBy = "autores", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "autor", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Livro> livros = new ArrayList<>();
 
