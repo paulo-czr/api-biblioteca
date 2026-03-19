@@ -30,7 +30,7 @@ public class Categoria {
     @Column(nullable = false, length = 50)
     private String nomeCategoria;
 
-    @OneToMany(mappedBy = "categoria")
+    @OneToMany(mappedBy = "categorias")
     @JsonManagedReference
     private List<Livro>  livros = new ArrayList<>();
 
