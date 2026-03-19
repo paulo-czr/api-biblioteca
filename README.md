@@ -7,7 +7,7 @@ O projeto foi desenvolvido focando em boas práticas de arquitetura, separação
 
   <p align="center">
   <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=java,spring,vscode,swagger,docker,git&theme=dark" />
+    <img src="https://skillicons.dev/icons?i=java,spring,vscode,docker,git&theme=dark" />
   </a>
 </p>
 
