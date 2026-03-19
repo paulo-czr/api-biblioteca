@@ -21,7 +21,8 @@ O projeto foi desenvolvido focando em boas práticas de arquitetura, separação
 - [Funcionalidades Principais](#funcionalidades-principais)
 - [Endpoints](#endpoints-da-api)
 - [Como executar](#como-executar-o-projeto)
-- [Variáveis de Ambiente](#variaveis-de-ambiente)
+- [Documentação](#documentação)
+- [Variáveis de Ambiente](#variáveis-de-ambiente)
 - [Autor](#autor)
 
 ---
@@ -145,6 +146,14 @@ docker compose up -d --build
 A aplicação estará disponível em ``` http://localhost:8080 ```  
 O banco de dados MySQL estará rodando na porta ```3306```  
   
+---
+
+## Documentação
+A API utiliza **Swagger (OpenAPI 3)** para facilitar o consumo e teste dos endpoints. 
+
+- URL Local: http://localhost:8080/swagger-ui.html  
+- Recursos: Descrição detalhada de modelos, parâmetros de validação e códigos de status HTTP  
+
 ---
 
 ## Variáveis de Ambiente  
