@@ -33,7 +33,7 @@ public class Categoria {
     @Column(nullable = false, length = 50)
     private String nomeCategoria;
 
-    @OneToMany(mappedBy = "categorias", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "categoria", cascade = CascadeType.ALL)
     @JsonManagedReference
     private List<Livro>  livros = new ArrayList<>();
 
