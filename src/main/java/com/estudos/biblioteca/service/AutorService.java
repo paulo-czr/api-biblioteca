@@ -32,6 +32,11 @@ public class AutorService {
     @Transactional
     public AutorResponseDto salvarAutor(AutorRequestDto dto) {
         Autor autorEntity = mapper.toEntity(dto);
+
+        if (autorEntity == null) {
+            throw new IllegalArgumentException("Erro ao converter os dados do autor - Autor Nulo");
+        }
+
         Autor autorSalvo = repository.save(autorEntity);
         return mapper.toDto(autorSalvo);
     }
@@ -69,7 +74,7 @@ public class AutorService {
      * Deleta Autor através do seu ID
      * Exige confirmação se o Autor estiver Livros vinculados a ele
      * 
-     * @param id Identificador do Autor a ser deletado
+     * @param id      Identificador do Autor a ser deletado
      * @param confirm Confirmação de Deleção
      */
     @Transactional
@@ -77,7 +82,9 @@ public class AutorService {
         Autor autor = verificaAutorExistentePorId(id);
 
         if (!autor.getLivros().isEmpty() && confirm == false) {
-            throw new IllegalArgumentException("O Autor " +autor.getNome() +" - ID: "+id +" possui " +autor.getLivros().size() +" livro(s). Para deletar tudo, envie o parâmetro de confirmação. (/autores/id-autor?confirm=true)");
+            throw new IllegalArgumentException("O Autor " + autor.getNome() + " - ID: " + id + " possui "
+                    + autor.getLivros().size()
+                    + " livro(s). Para deletar tudo, envie o parâmetro de confirmação. (/autores/id-autor?confirm=true)");
         }
 
         repository.deleteById(id);
@@ -90,6 +97,10 @@ public class AutorService {
      * @return Se o Autor existir, retorna ele
      */
     public Autor verificaAutorExistentePorId(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Erro ao converter o ID - ID Nulo");
+        }
+
         Autor autorExistente = repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Autor com o ID " + id + "não encontrado."));
         return autorExistente;

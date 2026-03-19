@@ -23,7 +23,8 @@ public class LivroService {
     private final LivroRepository repository;
     private final LivroMapper mapper;
 
-    public LivroService(LivroRepository repository, LivroMapper mapper, AutorService autorService, CategoriaService categoriaService) {
+    public LivroService(LivroRepository repository, LivroMapper mapper, AutorService autorService,
+            CategoriaService categoriaService) {
         this.repository = repository;
         this.mapper = mapper;
         this.autorService = autorService;
@@ -39,14 +40,18 @@ public class LivroService {
      */
     @Transactional
     public LivroResponseDto salvarLivro(LivroRequestDto dto) {
-        
+
         Livro livroEntity = mapper.toEntity(dto);
-        //Garante que o Autor e Categoria existem para vincular o Livro a eles
+        // Garante que o Autor e Categoria existem para vincular o Livro a eles
         Autor autor = autorService.verificaAutorExistentePorId(dto.getAutorId());
         Categoria categoria = categoriaService.verificarCategoriaPorId(dto.getCategoriaId());
 
         autor.adicionarLivro(livroEntity);
         categoria.adicionarLivro(livroEntity);
+
+        if (livroEntity == null) {
+            throw new IllegalArgumentException("Erro ao converter os dados do Livro - Livro Nulo");
+        }
 
         Livro livroSalvo = repository.save(livroEntity);
         return mapper.toDto(livroSalvo);
@@ -54,10 +59,11 @@ public class LivroService {
 
     /**
      * Retorna um lista contendo todos os livros do Banco
+     * 
      * @return Lista de DTO contendo somente os dados essenciais
      */
-    public List <LivroResponseDto> buscarTodosLivros() {
-        List <Livro> livros = repository.findAll();
+    public List<LivroResponseDto> buscarTodosLivros() {
+        List<Livro> livros = repository.findAll();
         return mapper.toDtoList(livros);
     }
 
@@ -135,7 +141,6 @@ public class LivroService {
     @Transactional
     public void deletarLivroPorId(Long id) {
         verificaLivroExistentePorId(id);
-
         repository.deleteById(id);
     }
 
@@ -146,6 +151,10 @@ public class LivroService {
      * @return Se o Livro existir, retorna ele
      */
     public Livro verificaLivroExistentePorId(Long id) {
+        if (id == null) {
+            throw new IllegalArgumentException("Erro ao converter o ID - ID Nulo");
+        }
+
         Livro livroExistente = repository.findById(id).orElseThrow(
                 () -> new EntityNotFoundException("Livro com o ID " + id + " não encontrado."));
 
